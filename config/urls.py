@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from events import views as events_views
 
 urlpatterns = [
-    path('', events_views.home, name='home'),  # головна сторінка з подіями
+    path('', events_views.home, name='home'),
     path('admin/', admin.site.urls),
     path('events/', include('events.urls')),
     path('surveys/', include('surveys.urls')),

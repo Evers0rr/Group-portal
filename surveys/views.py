@@ -17,20 +17,19 @@ def survey_detail(request, survey_id, step=0):
     questions = survey.questions.order_by('order')
     step = int(step)
     if step >= len(questions):
-        # Завершення опитування
+       
         return redirect('survey_complete', survey_id=survey.pk)
 
     question = questions[step]
 
-    # Перевірка чи користувач вже відповів на це опитування
+    
     response, created = SurveyResponse.objects.get_or_create(survey=survey, user=request.user)
 
     if request.method == 'POST':
         form = SurveyAnswerForm(request.POST, question=question)
         if form.is_valid():
             answer_pk = form.cleaned_data['answer']
-            # Зберегти відповідь
-            # Спочатку видалимо відповідь на це питання якщо існує
+            
             SurveyResponseAnswer.objects.filter(response=response, question=question).delete()
             SurveyResponseAnswer.objects.create(
                 response=response,
@@ -39,7 +38,7 @@ def survey_detail(request, survey_id, step=0):
             )
             return redirect('survey_detail', survey_id=survey.pk, step=step+1)
     else:
-        # Якщо вже є відповідь, підставимо у форму
+        
         try:
             existing_answer = SurveyResponseAnswer.objects.get(response=response, question=question)
             initial = {'answer': existing_answer.answer.pk}
@@ -66,7 +65,7 @@ def survey_complete(request, survey_id):
 def survey_results(request, survey_id):
     survey = get_object_or_404(Survey, pk=survey_id)
     questions = survey.questions.order_by('order')
-    # Зібрати відповіді для кожного питання
+   
     data = []
     for question in questions:
         answers = question.answers.all()
