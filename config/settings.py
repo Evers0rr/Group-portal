@@ -21,7 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = 'django-insecure-_&!0=j4t0-e=ha#%nehe!q$5739*a$xu_!xuo46y9ixtoa%o)h'
+=======
+SECRET_KEY = 'django-insecure-!!gwa#mh98ner=+t6$10sc1wdaes*_qfk1@l2(n@sd(o$qo2x)'
+>>>>>>> 6d51ee18d867e3fbd33babb1d6012ab478d9e787
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,10 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'core',
     'events',
     'surveys',
     'polls',
+=======
+    'crispy_forms',  
+    'crispy_bootstrap5',
+>>>>>>> 6d51ee18d867e3fbd33babb1d6012ab478d9e787
 ]
 
 MIDDLEWARE = [
@@ -56,7 +65,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6d51ee18d867e3fbd33babb1d6012ab478d9e787
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -64,7 +76,10 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+<<<<<<< HEAD
                 'django.template.context_processors.debug',
+=======
+>>>>>>> 6d51ee18d867e3fbd33babb1d6012ab478d9e787
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -73,8 +88,11 @@ TEMPLATES = [
     },
 ]
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6d51ee18d867e3fbd33babb1d6012ab478d9e787
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
@@ -129,5 +147,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+=======
+>>>>>>> 6d51ee18d867e3fbd33babb1d6012ab478d9e787
