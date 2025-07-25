@@ -15,7 +15,7 @@ def create_announcement(request):
         announcement = form.save(commit=False)
         announcement.author = request.user
         announcement.save()
-        return redirect('annonce-home')
+        return redirect('home')
     return render(request, 'announcements/form.html', {'form': form, 'title': 'Створити оголошення'})
 
 @login_required
@@ -25,7 +25,7 @@ def edit_announcement(request, pk):
     form = AnnouncementForm(request.POST or None, instance=announcement)
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect('annonce-home')
+        return redirect('home')
     return render(request, 'announcements/form.html', {'form': form, 'title': 'Редагувати оголошення'})
 
 @login_required
@@ -34,5 +34,5 @@ def delete_announcement(request, pk):
     announcement = get_object_or_404(Announcement, pk=pk)
     if request.method == 'POST':
         announcement.delete()
-        return redirect('annonce-home')
+        return redirect('home')
     return render(request, 'announcements/delete_confirm.html', {'announcement': announcement})

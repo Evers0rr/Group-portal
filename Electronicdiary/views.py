@@ -23,7 +23,6 @@ class CreateGrade(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'Electronic_Diary/grade_create.html'
     success_url = reverse_lazy('grade-list')
 
-
     def form_valid(self, form):
         messages.success(self.request, 'Оцінка успішно додана!')
         return super().form_valid(form)
