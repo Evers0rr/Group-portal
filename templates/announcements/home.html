@@ -1,0 +1,24 @@
+{% extends "based/base.html" %}
+{% block content %}
+<h1>Головна сторінка</h1>
+<h2>Оголошення</h2>
+{% if request.user.is_staff %}
+  <a href="{% url 'create_announcement' %}">➕ Створити оголошення</a>
+{% endif %}
+<ul>
+  {% for a in announcements %}
+    <li>
+      <strong>{{ a.title }}</strong> ({{ a.created_at|date:"d.m.Y H:i" }})<br>
+      {{ a.content|linebreaks }}
+      {% if request.user.is_staff %}
+        <div>
+          <a href="{% url 'edit_announcement' a.pk %}">✏️ Редагувати</a> |
+          <a href="{% url 'delete_announcement' a.pk %}">🗑️ Видалити</a>
+        </div>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>Немає оголошень</li>
+  {% endfor %}
+</ul>
+{% endblock %}

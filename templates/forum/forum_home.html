@@ -1,0 +1,18 @@
+{% extends 'based/base.html' %}
+{% block content %}
+<h2>Форум</h2>
+
+{% if user.is_staff %}
+    <a href="{% url 'create_post' %}">➕ Створити пост</a>
+{% endif %}
+
+<hr>
+
+{% for post in posts %}
+    <div style="margin-bottom: 20px;">
+        <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
+        <p>{{ post.content|truncatewords:25 }}</p>
+        <small>Автор: {{ post.created_by.username }} | {{ post.created_at }}</small>
+    </div>
+{% endfor %}
+{% endblock %}
