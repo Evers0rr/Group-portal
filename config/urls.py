@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('announcements.urls')),
     path('forum/', include('forum.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('electronicdiary/', include('Electronicdiary.urls')),
 ]
 
