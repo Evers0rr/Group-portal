@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Опитування</h1>
+<ul>
+  {% for survey in surveys %}
+    <li><a href="{% url 'survey_detail_first' survey.pk %}">{{ survey.title }}</a></li>
+  {% empty %}
+    <li>Опитувань поки немає.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Видалити голосування "{{ poll.title }}"?</h1>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Видалити</button>
+  <a href="{% url 'poll_list' %}">Скасувати</a>
+</form>
+{% endblock %}
