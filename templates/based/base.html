@@ -11,9 +11,11 @@
           crossorigin="anonymous">
 </head>
 <body>
-    
-
-
+    <script>
+        {% for message in messages %}
+            alert("{{ message|escapejs }}"); 
+        {% endfor %}
+    </script>
     <div class="container mt-4">
         {% block content %}
         {% endblock %}
@@ -26,4 +28,6 @@
 
 </body>
 </html>
+
+
 
