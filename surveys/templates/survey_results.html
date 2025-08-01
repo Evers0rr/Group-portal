@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Результати опитування: {{ survey.title }}</h1>
+{% for item in data %}
+  <h3>{{ item.question }}</h3>
+  <ul>
+    {% for answer_text, count in item.answer_counts %}
+      <li>{{ answer_text }} — {{ count }} голосів</li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+<a href="{% url 'survey_list' %}">Назад до опитувань</a>
+{% endblock %}

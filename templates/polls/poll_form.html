@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% if create %}Створити голосування{% else %}Редагувати голосування{% endif %}</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">{% if create %}Створити{% else %}Зберегти{% endif %}</button>
+</form>
+<a href="{% url 'poll_list' %}">Назад до списку голосувань</a>
+{% endblock %}
