@@ -23,7 +23,7 @@ class MaterialForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         material_type = cleaned_data.get('material_type')
-        
+
         if material_type == 'file' and not cleaned_data.get('file'):
             self.add_error('file', "Необхідно завантажити файл.")
         if material_type == 'image' and not cleaned_data.get('image'):

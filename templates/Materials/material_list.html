@@ -1,0 +1,49 @@
+{% extends 'based/base.html' %}
+{% load static %}
+{% load youtube_tags %}
+{% block content %}
+
+
+<h1>Список матеріалів</h1>
+
+{% if user.is_staff %}
+    <a href="{% url 'material-create' %}">➕ Додати новий матеріал</a>
+{% endif %}
+
+<ul>
+    {% for material in materials %}
+    <li style="margin-bottom: 30px;">
+        <h3>{{ material.title }}</h3>
+        <p>{{ material.description|linebreaksbr }}</p>
+
+        {% if material.is_file %}
+            <a href="{{ material.file.url }}" download>Завантажити файл</a>
+        {% elif material.is_image %}
+            <img src="{{ material.image.url }}" alt="{{ material.title }}" style="max-width: 400px;">
+        {% elif material.is_youtube %}
+            <iframe width="560" height="315"
+                src="{{ material.get_embed_url }}"
+                frameborder="0" allowfullscreen></iframe>
+        {% elif material.is_link %}
+            <a href="{{ material.external_link }}" target="_blank" rel="noopener noreferrer">
+                Відкрити посилання
+            </a>
+        {% endif %}
+
+        <p><small>Додано: {{ material.created_at|date:"d.m.Y H:i" }} користувачем {{ material.created_by.username }}</small></p>
+
+        {% if user.is_staff%}
+            <a href="{% url 'material-edit' material.pk %}">Редагувати</a> |
+            <a href="{% url 'material-delete' material.pk %}">Видалити</a>
+        {% endif %}
+    </li>
+    <hr>
+    {% empty %}
+        <li>Матеріали відсутні.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+
+

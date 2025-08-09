@@ -16,7 +16,7 @@ class Material(models.Model):
     description = models.TextField(blank=True, verbose_name="Опис")
     material_type = models.CharField(max_length=10, choices=MATERIAL_TYPES, verbose_name="Тип матеріалу")
 
-    file = models.FileField(upload_to='materials/', blank=True, null=True, verbose_name="Файл")
+    file = models.FileField(upload_to='materials/files/', blank=True, null=True, verbose_name="Файл")
     image = models.ImageField(upload_to='materials/images/', blank=True, null=True, verbose_name="Зображення")
     youtube_url = models.URLField(blank=True, null=True, verbose_name="YouTube URL")
     external_link = models.URLField(blank=True, null=True, verbose_name="Зовнішнє посилання")
@@ -45,6 +45,16 @@ class Material(models.Model):
     def is_link(self):
         return self.material_type == 'link'
 
+
+    def get_embed_url(self):
+        url = self.youtube_url
+        if "watch?v=" in url:
+            video_id = url.split("watch?v=")[-1]
+            return f"https://www.youtube.com/embed/{video_id}"
+        elif "youtu.be/" in url:
+            video_id = url.split("youtu.be/")[-1]
+            return f"https://www.youtube.com/embed/{video_id}"
+        return url
     
         
     

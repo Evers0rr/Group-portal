@@ -1,0 +1,27 @@
+{% extends 'based/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Додати новий матеріал</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if form.non_field_errors %}
+        <div style="color:red;">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div style="color:red;">
+            {{ form.errors }}
+        </div>
+    {% endif %}
+
+    <button type="submit">Зберегти</button>
+</form>
+
+<p><a href="{% url 'material-list' %}">Назад до списку матеріалів</a></p>
+{% endblock %}
