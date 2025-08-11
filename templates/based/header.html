@@ -1,0 +1,18 @@
+
+
+<div class = 'ulrs'  >
+    <a href="{%url 'annonce-home'%}">Annoncements</a>
+    <a href="{%url 'grade-list'%}">Your Diary</a>
+    <a href="{%url 'home'%}">Events</a>
+    <a href="{%url 'forum_home'%}">Forum</a>
+    <a href="{%url 'poll_list'%}">Polls</a>
+    <a href="{%url 'survey_list'%}">Surveys</a>
+    <a href="">Materials</a>
+    <a href="{% url 'profiles' %}">Profiles</a>
+    {%if request.user.is_authenticated%}
+        <a href="{%url 'portfolio' request.user.id %} ">{{request.user.username}}</a>
+    {%else%}
+        <a href="{%url 'login'%}">Login</a>
+    {%endif%}
+</div>
+

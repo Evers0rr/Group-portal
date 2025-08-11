@@ -1,0 +1,21 @@
+{%extends "based/base.html" %}
+{%block content%}
+<div class="galeryMain">
+<h1>Галерея юзера:{{user}}</h1>
+
+    <a href="{%url 'galeryAdd'%}"><button>Make new photos</button></a>
+
+{%for photo in photos%}
+    {%if photo.is_aplied%}
+        <img class = 'galeryPhoto' src="{{photo.ava.url}}" alt="фотографія">
+        {%if photo.description%}
+        <p>{{photo.description}}</p>
+        {%if request.user == photo.owner or request.user.is_staff  %}
+            <a href="{%url 'galertDelete'%} photo.id">delete photo</a>
+        {%endif%}
+        {%endif%}
+    {%endif%}
+<hr>
+</div>
+{%endfor%}
+{%endblock%}

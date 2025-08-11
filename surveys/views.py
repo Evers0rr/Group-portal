@@ -9,7 +9,7 @@ def is_moderator(user):
 @login_required
 def survey_list(request):
     surveys = Survey.objects.all()
-    return render(request, 'surveys/survey_list.html', {'surveys': surveys})
+    return render(request, template_name='surveys/survey_list.html',context= {'surveys': surveys})
 
 @login_required
 def survey_detail(request, survey_id, step=0):
@@ -53,7 +53,7 @@ def survey_detail(request, survey_id, step=0):
         'step': step,
         'total_steps': len(questions),
     }
-    return render(request, 'surveys/survey_detail.html', context)
+    return render(request, template_name='surveys/survey_detail.html', context=context  )
 
 @login_required
 def survey_complete(request, survey_id):

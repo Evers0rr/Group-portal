@@ -1,0 +1,11 @@
+{%extends 'based/base.html'%}
+{%block content%}
+
+<form method="POST" enctype="multipart/form-data" action="{%url 'galeryAdd'%}">
+    {%csrf_token%}
+    {{ form.as_p }}
+
+
+    <button type="submit">Добавити фото</button>
+</form>
+{%endblock%}

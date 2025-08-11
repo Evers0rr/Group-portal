@@ -1,0 +1,38 @@
+{%extends "based/base.html"%}
+{% block content%}
+<div class="addproject">
+    <h1>{{project.title}}</h1>
+    <h3>{{project.description}}</h3>
+    <h4>{{project.owner.username}}</h4>
+    <hr>
+    <a href="{% url 'mediaAdd' project.id%}"><button>Add something to media</button></a>
+    <hr>
+    {%for media in medias%}
+
+    {%if media.img.url%}
+        <img src="{{media.img.url}}" alt="error in image">
+        <hr>
+    {%endif%}
+
+    {%if media.links%}
+        <a href="">{{media.links}}</a>
+        <hr>
+    {%endif%}
+
+    {%if media.files%}
+    <a href="{{media.files}}" class = 'action' download>Downoald file</a>
+     <hr>
+    {%endif%}
+
+    {%if media.description%}
+    <p>{{media.description}}</p>
+    {%endif%}
+
+
+    {%endfor%}
+
+
+</div>
+
+
+{%endblock%}

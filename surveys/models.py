@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -26,7 +27,7 @@ class SurveyAnswer(models.Model):
 
 class SurveyResponse(models.Model):
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     submitted_at = models.DateTimeField(auto_now=True)
 
 class SurveyResponseAnswer(models.Model):

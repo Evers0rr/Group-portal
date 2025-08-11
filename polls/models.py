@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -19,7 +21,7 @@ class PollOption(models.Model):
 class PollVote(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     option = models.ForeignKey(PollOption, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
     voted_at = models.DateTimeField(auto_now=True)
 
     class Meta:

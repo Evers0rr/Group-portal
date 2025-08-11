@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -5,11 +7,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL , on_delete=models.CASCADE, related_name='student')
 
     def __str__(self):
         return f'{self.user.last_name} {self.user.first_name} {self.user.email}'
-    
+
 class Subjects(models.Model):
     name = models.CharField(max_length=20)
 
@@ -19,7 +21,7 @@ class Subjects(models.Model):
 
     def __str__(self):
         return self.name
-  
+
 class Grade(models.Model):
     student = models.ForeignKey('Student',on_delete=models.CASCADE, related_name='grades')
     subjects = models.ForeignKey('Subjects',on_delete=models.CASCADE, related_name='grades')
@@ -28,7 +30,7 @@ class Grade(models.Model):
 
     def __str__(self):
         return f'Студент{self.student} отримав по предмету: {self.subjects} - {self.value}'
-    
-    
-    
+
+
+
 

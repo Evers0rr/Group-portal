@@ -1,0 +1,23 @@
+{%extends "based/base.html"%}
+{% block content%}
+
+
+<h1>Creation</h1>
+<div>
+<form method="POST" , action="{%url 'create_project' %}">
+{% csrf_token %}
+  <div>
+    <label>Title a project</label>
+    <input type="text" id="title" name = "title">
+  </div>
+
+  <div>
+  <label>Description</label>
+    <input type="text" id="description" name = "description">
+  </div>
+
+  <button type="submit">Start project</button>
+</form>
+</div>
+
+{%endblock%}
