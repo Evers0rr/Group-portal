@@ -1,0 +1,14 @@
+{% extends 'based/base.html' %}
+
+{% block title %}Підтвердження видалення{% endblock %}
+
+{% block content %}
+<h2>Підтвердження видалення</h2>
+<p>Ви впевнені, що хочете видалити матеріал? <strong>{{ object.material }}</strong></p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Так, видалити</button>
+    <a href="{% url 'material-list' %}" class="btn btn-secondary">Скасувати</a>
+</form>
+{% endblock %}

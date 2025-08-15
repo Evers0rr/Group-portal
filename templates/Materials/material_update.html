@@ -1,0 +1,15 @@
+{% extends 'based/base.html' %}
+
+{% block title %}Редагування матеріалу{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Редагування матеріалу</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="{% url 'material-list' %}" class="btn btn-secondary">Скасувати</a>
+    </form>
+{% endblock %}
