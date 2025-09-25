@@ -24,7 +24,6 @@ class Projects:
         if request.method == "POST":
             form = ProjectForm(request.POST)
             if form.is_valid():
-                print(form)
                 form.instance.owner_id = request.user.id
                 form.save()
                 return redirect("projects", request.user.id)
@@ -61,15 +60,17 @@ class Projects:
 
     def project_view(request,project_id):
         project = get_object_or_404(Project, id=project_id)
-        medias = Media.objects.filter(owner = project.owner)
+        medias = Media.objects.filter(owner = project)
         return render(request,template_name="portfolio/your_project.html", context={"project": project,"medias":medias})
 
     def projectMediaAdd(request, project_id):
         project = get_object_or_404(Project, id=project_id)
         if request.method == "POST":
-            form = MedaiAddForm(request.POST, request.FILES, instance=project)
+            form = MedaiAddForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()
+                media = form.save(commit = False)
+                media.owner = project
+                media.save()
                 return redirect("project", project_id)
         else:
             form = MedaiAddForm()

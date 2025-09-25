@@ -1,23 +1,30 @@
-{%extends "based/base.html"%}
-{% block content%}
+{% extends "based/base.html" %}
+{% block content %}
 
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded-3" style="max-width: 600px; margin: auto;">
+        <h2 class="text-center mb-4">🚀 Створення проекту</h2>
 
-<h1>Creation</h1>
-<div>
-<form method="POST" , action="{%url 'create_project' %}">
-{% csrf_token %}
-  <div>
-    <label>Title a project</label>
-    <input type="text" id="title" name = "title">
-  </div>
+        <form method="POST" action="{% url 'create_project' %}">
+            {% csrf_token %}
 
-  <div>
-  <label>Description</label>
-    <input type="text" id="description" name = "description">
-  </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Назва проекту</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Введіть назву" required>
+            </div>
 
-  <button type="submit">Start project</button>
-</form>
+            <div class="mb-3">
+                <label for="description" class="form-label">Опис</label>
+                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Короткий опис" required></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success px-4 py-2 rounded-pill">
+                    ✅ Створити проект
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
-{%endblock%}
+{% endblock %}

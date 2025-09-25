@@ -1,11 +1,31 @@
-{%extends 'based/base.html'%}
-{%block content%}
+{% extends 'based/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
 
-<form method="POST" enctype="multipart/form-data" action="{%url 'galeryAdd'%}">
-    {%csrf_token%}
-    {{ form.as_p }}
+<div class="container mt-5" style="max-width: 500px;">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'galeryAdd' %}">
+        <div class="card shadow-sm p-4 rounded">
+            <h3 class="mb-4 text-center">📸 Add a Photo</h3>
+            {% csrf_token %}
 
+            {{ form|crispy }}
 
-    <button type="submit">Добавити фото</button>
-</form>
-{%endblock%}
+            <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                    ➕ Add Photo
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    /* Додатковий hover-ефект для кнопки */
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.03);
+        transition: 0.2s;
+    }
+</style>
+
+{% endblock %}

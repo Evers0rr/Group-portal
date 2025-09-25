@@ -7,4 +7,4 @@ class PhotoForm(forms.ModelForm):
 
     class Meta:
         model = Photo
-        fields = ['phote', 'description']
+        fields = ['photo', 'description']

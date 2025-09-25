@@ -1,38 +1,51 @@
-{%extends "based/base.html"%}
-{% block content%}
-<div class="addproject">
-    <h1>{{project.title}}</h1>
-    <h3>{{project.description}}</h3>
-    <h4>{{project.owner.username}}</h4>
-    <hr>
-    <a href="{% url 'mediaAdd' project.id%}"><button>Add something to media</button></a>
-    <hr>
-    {%for media in medias%}
+{% extends "based/base.html" %}
+{% block content %}
 
-    {%if media.img.url%}
-        <img src="{{media.img.url}}" alt="error in image">
-        <hr>
-    {%endif%}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded-3 mb-4">
+        <h1 class="text-center">{{ project.title }}</h1>
+        <h4 class="text-muted text-center">{{ project.description }}</h4>
+        <h5 class="text-center">Owner: {{ project.owner.username }}</h5>
+        <div class="text-center mt-3">
+            <a href="{% url 'mediaAdd' project.id %}" class="btn btn-primary rounded-pill px-4 py-2">
+                ➕ Add something to media
+            </a>
+        </div>
+    </div>
 
-    {%if media.links%}
-        <a href="">{{media.links}}</a>
-        <hr>
-    {%endif%}
+    {% for media in medias %}
+    <div class="card mb-3 shadow-sm p-3 rounded-3">
+        {% if media.img %}
+            <img src="{{ media.img.url }}" class="img-fluid rounded mb-2" alt="error in image">
+        {% endif %}
 
-    {%if media.files%}
-    <a href="{{media.files}}" class = 'action' download>Downoald file</a>
-     <hr>
-    {%endif%}
+        {% if media.links %}
+            <p><a href="{{ media.links }}" target="_blank">{{ media.links }}</a></p>
+        {% endif %}
 
-    {%if media.description%}
-    <p>{{media.description}}</p>
-    {%endif%}
+        {% if media.files %}
+            <p><a href="{{ media.files.url }}" class="btn btn-outline-secondary action" download>
+                ⬇ Download file
+            </a></p>
+        {% endif %}
 
-
-    {%endfor%}
-
-
+        {% if media.description %}
+            <p>{{ media.description }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
 </div>
 
+<script>
+    const actions = document.querySelectorAll(".action");
+    actions.forEach(action => {
+        action.addEventListener("click", event => {
+            const agree = confirm("Do you want to download this file?");
+            if (!agree) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 
-{%endblock%}
+{% endblock %}

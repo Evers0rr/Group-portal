@@ -3,6 +3,7 @@ from django.conf.global_settings import AUTH_USER_MODEL
 from django.contrib.auth.models import User
 from django.db import models
 import os
+from Authenticationsystem.models import Profile
 # Create your models here.
 def user_img_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -24,7 +25,7 @@ class Media(models.Model):
     files = models.FileField(upload_to='files',null=True,blank=True)
     links = models.URLField(null=True, blank=True)
     description = models.CharField(max_length=25, null=True,blank=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL , related_name = "media", on_delete=models.CASCADE)
+    owner = models.ForeignKey(Project , related_name = "media", on_delete=models.CASCADE)
     time_add = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

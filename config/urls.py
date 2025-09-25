@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include('events.urls')),
     path('surveys/', include('surveys.urls')),
-    path('polls/', include('polls.urls')),
+    path('poll/', include('polls.urls')),
     path('forum/', include('forum.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('electronicdiary/', include('Electronicdiary.urls')),

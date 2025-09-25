@@ -12,12 +12,10 @@ class CustomCreationForm(UserCreationForm):
 
 class ProfileEditeForm(forms.ModelForm):
     ava = forms.ImageField(required=False)
-
+    description = forms.CharField(required=False)
     class Meta:
         model = Profile
         fields = ['name','last_name','first_name','description','isOpen','ava']
 
-    def clean(self):
-        ava = self.cleaned_data['ava']
-        if ava is None:
-            ava = 'media/ava/SkrYaro.jpg'
+
+

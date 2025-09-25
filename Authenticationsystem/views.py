@@ -21,7 +21,10 @@ from portfolio.models import Project
 def registration_view(request):
     if request.method == "POST":
         form = CustomCreationForm(request.POST)
+
         if form.is_valid():
+
+
             user = form.save()
             login(request, user)
             profile = Profile.objects.create(

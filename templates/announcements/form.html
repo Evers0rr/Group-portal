@@ -1,9 +1,30 @@
 {% extends "based/base.html" %}
 {% block content %}
-  <h2>{{ title }}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зберегти</button>
-  </form>
+
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow-sm p-4 rounded">
+        <h2 class="mb-4 text-center">{{ title }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                    💾 Зберегти
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+</style>
+
 {% endblock %}

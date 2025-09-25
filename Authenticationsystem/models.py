@@ -14,7 +14,7 @@ class Profile(models.Model):
     isOpen = models.BooleanField(default=False)
     ava = models.ImageField(upload_to=user_img_path, blank=True,null=True, default="ava/default_ava.jpg")
     user = models.OneToOneField(settings.AUTH_USER_MODEL  , related_name='name' , on_delete=models.CASCADE)
-    description = models.TextField(null=True,blank=True,default=' ')
+    description = models.CharField(max_length=1000,null=True,blank=True,default='There no description, for now')
     time_create = models.DateTimeField(auto_now_add=True)
     time_upd = models.DateTimeField(auto_now=True)
 

@@ -1,24 +1,52 @@
 {% extends "based/base.html" %}
 {% block content %}
-<h1>Головна сторінка</h1>
-<h2>Оголошення</h2>
-{% if request.user.is_staff %}
-  <a href="{% url 'create_announcement' %}">➕ Створити оголошення</a>
-{% endif %}
-<ul>
-  {% for a in announcements %}
-    <li>
-      <strong>{{ a.title }}</strong> ({{ a.created_at|date:"d.m.Y H:i" }})<br>
-      {{ a.content|linebreaks }}
-      {% if request.user.is_staff %}
-        <div>
-          <a href="{% url 'edit_announcement' a.pk %}">✏️ Редагувати</a> |
-          <a href="{% url 'delete_announcement' a.pk %}">🗑️ Видалити</a>
+
+<div class="container text-center mt-5">
+    <h1>Головна сторінка</h1>
+</div>
+
+<div class="container text-center mt-4">
+    <h2>Оголошення</h2>
+    {% if request.user.is_staff %}
+        <div class="mb-3">
+            <a href="{% url 'create_announcement' %}" class="btn btn-success btn-lg rounded-pill">➕ Створити оголошення</a>
         </div>
-      {% endif %}
-    </li>
-  {% empty %}
-    <li>Немає оголошень</li>
-  {% endfor %}
-</ul>
+    {% endif %}
+</div>
+
+<div class="container mt-4">
+    <div class="row g-4">
+        {% for a in announcements %}
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4 rounded h-100">
+                <h4>{{ a.title }}</h4>
+                <small class="text-muted">{{ a.created_at|date:"d.m.Y H:i" }}</small>
+                <p class="mt-3">{{ a.content|linebreaks }}</p>
+
+                {% if request.user.is_staff %}
+                <div class="mt-3 d-flex gap-2 justify-content-center">
+                    <a href="{% url 'edit_announcement' a.pk %}" class="btn btn-warning btn-sm rounded-pill">✏️ Редагувати</a>
+                    <a href="{% url 'delete_announcement' a.pk %}" class="btn btn-danger btn-sm rounded-pill">🗑️ Видалити</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">Немає оголошень</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+</style>
+
 {% endblock %}
