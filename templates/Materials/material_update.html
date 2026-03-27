@@ -1,0 +1,33 @@
+{% extends 'based/base.html' %}
+
+{% block title %}Редагування матеріалу{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card shadow-sm p-4 rounded">
+        <h2 class="mb-4 text-center">Редагування матеріалу</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <div class="d-flex justify-content-center gap-3 mt-3">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill">💾 Зберегти</button>
+                <a href="{% url 'material-list' %}" class="btn btn-secondary btn-lg rounded-pill">⬅️ Скасувати</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+</style>
+
+{% endblock %}

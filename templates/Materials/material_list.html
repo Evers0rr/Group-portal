@@ -1,0 +1,63 @@
+{% extends 'based/base.html' %}
+{% load static %}
+{% load youtube_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Список матеріалів</h1>
+        {% if user.is_staff %}
+            <a href="{% url 'material-create' %}" class="btn btn-success btn-lg rounded-pill">➕ Додати новий матеріал</a>
+        {% endif %}
+    </div>
+
+    <div class="row g-4">
+        {% for material in materials %}
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4 rounded h-100">
+                <h3>{{ material.title }}</h3>
+                <p>{{ material.description|linebreaksbr }}</p>
+
+                {% if material.is_file %}
+                    <a href="{{ material.file.url }}" download class="btn btn-outline-primary btn-sm rounded-pill mb-2">Завантажити файл</a>
+                {% elif material.is_image %}
+                    <img src="{{ material.image.url }}" alt="{{ material.title }}" class="img-fluid rounded mb-2">
+                {% elif material.is_youtube %}
+                    <div class="ratio ratio-16x9 mb-2">
+                        <iframe src="{{ material.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                {% elif material.is_link %}
+                    <a href="{{ material.external_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-sm rounded-pill mb-2">
+                        Відкрити посилання
+                    </a>
+                {% endif %}
+
+                <small class="text-muted">Додано: {{ material.created_at|date:"d.m.Y H:i" }} користувачем {{ material.created_by.username }}</small>
+
+                {% if user.is_staff %}
+                    <div class="mt-3 d-flex gap-2">
+                        <a href="{% url 'material-edit' material.pk %}" class="btn btn-warning btn-sm rounded-pill">✏️ Редагувати</a>
+                        <a href="{% url 'material-delete' material.pk %}" class="btn btn-danger btn-sm rounded-pill">🗑️ Видалити</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">Матеріали відсутні.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+</style>
+
+{% endblock %}
